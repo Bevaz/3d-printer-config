@@ -5,6 +5,22 @@ Quality = {'HighQuality', 'FastSpeed'}
 Model = {'FDMi1', 'FDMi2'}
 Apps = {'Simplify3D', 'Cura', 'Slic3r', 'KISSlicer_materials', 'KISSlicer_printers', 'KISSlicer_styles', 'KISSlicer_supports', 'Marlin' }
 
+nozzleSize = 0.4
+layerHeight = 0.24
+printTempABS = 250
+printTempPLA = 210
+defaultSpeedHQ = 15
+defaultSpeedFS = 30
+maxXYSpeed = 80
+maxZSpeed = 3.5
+printSizeXi1 = 150
+printSizeXi2 = 250
+printSizeY = 150
+printSizeZ = 140
+infillPercentage = 30
+perimeterOutlines = 3
+solidLayers = 4
+
 templ = {}
 save = {}
 templData = {}
@@ -38,23 +54,6 @@ for app in Apps:
 for filament in Filament:
      for quality in Quality:
           for model in Model:
-
-               nozzleSize = 0.4
-               layerHeight = 0.24
-               printTempABS = 250
-               printTempPLA = 210
-               defaultSpeedHQ = 15
-               defaultSpeedFS = 30
-               maxXYSpeed = 80
-               maxZSpeed = 3.5
-               printSizeXi1 = 150
-               printSizeXi2 = 250
-               printSizeY = 150
-               printSizeZ = 140
-               infillPercentage = 30
-               perimeterOutlines = 3
-               solidLayers = 4
-
                args = {}
                args[ 'Simplify3D' ] = {
                     'modelName' : model,
