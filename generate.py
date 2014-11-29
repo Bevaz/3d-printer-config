@@ -3,7 +3,7 @@ from jinja2 import Template
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
 Model = {'FDMi1', 'FDMi2'}
-Apps = {'Simplify3D', 'Cura', 'Slic3r'}
+Apps = {'Simplify3D', 'Cura', 'Slic3r', 'KISSlicer_materials', 'KISSlicer_printers', 'KISSlicer_styles', 'KISSlicer_supports' }
 
 templ = {}
 save = {}
@@ -18,6 +18,15 @@ save[ 'Cura' ] = 'Cura/Zbot_{0}_{1}_{2}.ini'
 
 templ[ 'Slic3r' ] = 'Slic3r/zbot_templ.ini'
 save[ 'Slic3r' ] = 'Slic3r/Zbot_{0}_{1}_{2}.ini'
+
+templ[ 'KISSlicer_materials' ] = 'KISSlicer/_materials_templ.ini'
+save[ 'KISSlicer_materials' ] = 'KISSlicer/_materials_{0}_{2}.ini'
+templ[ 'KISSlicer_printers' ] = 'KISSlicer/_printers_templ.ini'
+save[ 'KISSlicer_printers' ] = 'KISSlicer/_printers_{0}_{2}.ini'
+templ[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_templ.ini'
+save[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_{0}_{2}.ini'
+templ[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_templ.ini'
+save[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_{0}_{2}.ini'
 
 for app in Apps:
     with open (templ[ app ], "r") as templFile[ app ]:
@@ -95,6 +104,28 @@ for filament in Filament:
                     'otherLayerTemp' : printTempABS if filament == 'ABS' else printTempPLA,
                     'infillPercentage' : infillPercentage,
                                 }
+
+               args[ 'KISSlicer_materials' ] = {
+                    'modelName' : model,
+                    'layerHeight' : layerHeight,
+                    'nozzleSize' : nozzleSize,
+                    'width' : nozzleSize * 1.2,
+                    'perimeterOutlines' : perimeterOutlines,
+                    'solidLayerThickness' : round(solidLayers * layerHeight, 1),
+                    'maxXYSpeed' : maxXYSpeed,
+                    'maxZSpeed' : maxZSpeed,
+                    'printSizeX' : printSizeXi1 if model == 'FDMi1' else printSizeXi2,
+                    'printSizeY' : printSizeY,
+                    'printSizeZ' : printSizeZ,
+                    'printCenterX' : int(printSizeXi1 / 2) if model == 'FDMi1' else int(printSizeXi2 / 2),
+                    'printCenterY' : int(printSizeY / 2),
+                    'firstLayerTemp' :  printTempABS + 5 if filament == 'ABS' else printTempPLA + 5,
+                    'otherLayerTemp' : printTempABS if filament == 'ABS' else printTempPLA,
+                    'infillPercentage' : infillPercentage,
+                                }
+               args[ 'KISSlicer_printers' ] = args[ 'KISSlicer_materials' ]
+               args[ 'KISSlicer_styles' ] = args[ 'KISSlicer_materials' ]
+               args[ 'KISSlicer_supports' ] = args[ 'KISSlicer_materials' ]
 
                for app in Apps:
                     with open ( save[ app ].format( model, quality, filament ), "w" ) as saveFile:
