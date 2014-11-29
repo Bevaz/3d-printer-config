@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<profile name="zbot_fdmi1">
+<profile name="zbot_{{ modelName }}">
   <printMaterial></printMaterial>
   <printQuality></printQuality>
   <extruder name="Extruder 1">
     <toolheadNumber>0</toolheadNumber>
-    <diameter>0.4</diameter>
+    <diameter>{{ nozzleSize }}</diameter>
     <autoWidth>1</autoWidth>
-    <width>0.48</width>
+    <width>{{ width }}</width>
     <extrusionMultiplier>1</extrusionMultiplier>
     <useRetract>1</useRetract>
     <retractionDistance>1</retractionDistance>
@@ -19,10 +19,10 @@
     <wipeDistance>5</wipeDistance>
   </extruder>
   <primaryExtruder>0</primaryExtruder>
-  <layerHeight>0.25</layerHeight>
-  <topSolidLayers>4</topSolidLayers>
-  <bottomSolidLayers>4</bottomSolidLayers>
-  <perimeterOutlines>3</perimeterOutlines>
+  <layerHeight>{{ layerHeight }}</layerHeight>
+  <topSolidLayers>{{ solidLayers }}</topSolidLayers>
+  <bottomSolidLayers>{{ solidLayers }}</bottomSolidLayers>
+  <perimeterOutlines>{{ perimeterOutlines }}</perimeterOutlines>
   <printPerimetersInsideOut>1</printPerimetersInsideOut>
   <startPointOption>1</startPointOption>
   <startPointOriginX>0</startPointOriginX>
