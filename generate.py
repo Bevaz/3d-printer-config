@@ -1,4 +1,4 @@
-from jinja2 import Template
+from jinja2 import Template, StrictUndefined
 
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
@@ -33,7 +33,7 @@ save[ 'Marlin' ] = 'Marlin/Zbot_{0}.patch'
 
 for app in Apps:
     with open (templ[ app ], "r") as templFile[ app ]:
-        templData[ app ]=Template(templFile[ app ].read())
+        templData[ app ]=Template(templFile[ app ].read(), undefined=StrictUndefined)
 
 for filament in Filament:
      for quality in Quality:
