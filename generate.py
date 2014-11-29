@@ -3,7 +3,7 @@ from jinja2 import Template
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
 Model = {'FDMi1', 'FDMi2'}
-Apps = {'Simplify3D', 'Cura'}
+Apps = {'Simplify3D', 'Cura', 'Slic3r'}
 
 templ = {}
 save = {}
@@ -15,6 +15,9 @@ save[ 'Simplify3D' ] = 'Simplify3D/Zbot_{0}_{1}_{2}.fff'
 
 templ[ 'Cura' ] = 'Cura/zbot_templ.ini'
 save[ 'Cura' ] = 'Cura/Zbot_{0}_{1}_{2}.ini'
+
+templ[ 'Slic3r' ] = 'Slic3r/zbot_templ.ini'
+save[ 'Slic3r' ] = 'Slic3r/Zbot_{0}_{1}_{2}.ini'
 
 for app in Apps:
     with open (templ[ app ], "r") as templFile[ app ]:
@@ -65,6 +68,23 @@ for filament in Filament:
                     'nozzleSize' : nozzleSize,
                     'wallThickness' : round(perimeterOutlines * nozzleSize, 1 ),
                     'solidLayerThickness' : round(solidLayers * layerHeight, 1),
+                    'defaultSpeed' : defaultSpeedHQ if quality == 'HighQuality' else defaultSpeedFS,
+                    'maxXYSpeed' : maxXYSpeed,
+                    'maxZSpeed' : maxZSpeed,
+                    'printSizeX' : printSizeXi1 if model == 'FDMi1' else printSizeXi2,
+                    'printSizeY' : printSizeY,
+                    'printSizeZ' : printSizeZ,
+                    'firstLayerTemp' :  printTempABS + 5 if filament == 'ABS' else printTempPLA + 5,
+                    'otherLayerTemp' : printTempABS if filament == 'ABS' else printTempPLA,
+                    'infillPercentage' : infillPercentage,
+                                }
+
+               args[ 'Slic3r' ] = {
+                    'modelName' : model,
+                    'layerHeight' : layerHeight,
+                    'nozzleSize' : nozzleSize,
+                    'perimeterOutlines' : perimeterOutlines,
+                    'solidLayers' : solidLayers,
                     'defaultSpeed' : defaultSpeedHQ if quality == 'HighQuality' else defaultSpeedFS,
                     'maxXYSpeed' : maxXYSpeed,
                     'maxZSpeed' : maxZSpeed,
