@@ -3,7 +3,7 @@ from jinja2 import Template
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
 Model = {'FDMi1', 'FDMi2'}
-Apps = {'Simplify3D', 'Cura', 'Slic3r', 'KISSlicer_materials', 'KISSlicer_printers', 'KISSlicer_styles', 'KISSlicer_supports' }
+Apps = {'Simplify3D', 'Cura', 'Slic3r', 'KISSlicer_materials', 'KISSlicer_printers', 'KISSlicer_styles', 'KISSlicer_supports', 'Marlin' }
 
 templ = {}
 save = {}
@@ -27,6 +27,9 @@ templ[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_templ.ini'
 save[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_{0}_{2}.ini'
 templ[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_templ.ini'
 save[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_{0}_{2}.ini'
+
+templ[ 'Marlin' ] = 'Marlin/zbot_templ.patch'
+save[ 'Marlin' ] = 'Marlin/Zbot_{0}.patch'
 
 for app in Apps:
     with open (templ[ app ], "r") as templFile[ app ]:
@@ -126,6 +129,14 @@ for filament in Filament:
                args[ 'KISSlicer_printers' ] = args[ 'KISSlicer_materials' ]
                args[ 'KISSlicer_styles' ] = args[ 'KISSlicer_materials' ]
                args[ 'KISSlicer_supports' ] = args[ 'KISSlicer_materials' ]
+
+               args[ 'Marlin' ] = {
+                    'modelName' : model,
+                    'printSizeX' : printSizeXi1 + 5 if model == 'FDMi1' else printSizeXi2 + 5,
+                    'printSizeY' : printSizeY,
+                    'printSizeZ' : printSizeZ,
+                                }
+
 
                for app in Apps:
                     with open ( save[ app ].format( model, quality, filament ), "w" ) as saveFile:
