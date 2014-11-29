@@ -1,6 +1,3 @@
- Marlin/Configuration.h | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
-
 diff --git a/Marlin/Configuration.h b/Marlin/Configuration.h
 index 592072a..07001fd 100644
 --- a/Marlin/Configuration.h
