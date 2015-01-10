@@ -2,10 +2,12 @@ from jinja2 import Template, StrictUndefined
 from os import mkdir
 
 saveDir = 'shippable/'
-try:
-    mkdir(saveDir)
-except OSError:
-    pass
+
+for path in {'', 'Simplify3D', 'Cura', 'Slic3r', 'KISSlicer', 'Marlin' }:
+    try:
+        mkdir(saveDir + path)
+    except OSError:
+        pass
 
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
