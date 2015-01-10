@@ -1,4 +1,11 @@
 from jinja2 import Template, StrictUndefined
+from os import mkdir
+
+saveDir = 'shippable/'
+try:
+    mkdir(saveDir)
+except OSError:
+    pass
 
 Filament = {'ABS', 'PLA'}
 Quality = {'HighQuality', 'FastSpeed'}
@@ -27,25 +34,25 @@ templData = {}
 templFile = {}
 
 templ[ 'Simplify3D' ] = 'Simplify3D/zbot_templ.fff'
-save[ 'Simplify3D' ] = 'Simplify3D/Zbot_{0}_{1}_{2}.fff'
+save[ 'Simplify3D' ] = saveDir + 'Simplify3D/Zbot_{0}_{1}_{2}.fff'
 
 templ[ 'Cura' ] = 'Cura/zbot_templ.ini'
-save[ 'Cura' ] = 'Cura/Zbot_{0}_{1}_{2}.ini'
+save[ 'Cura' ] = saveDir + 'Cura/Zbot_{0}_{1}_{2}.ini'
 
 templ[ 'Slic3r' ] = 'Slic3r/zbot_templ.ini'
-save[ 'Slic3r' ] = 'Slic3r/Zbot_{0}_{1}_{2}.ini'
+save[ 'Slic3r' ] = saveDir + 'Slic3r/Zbot_{0}_{1}_{2}.ini'
 
 templ[ 'KISSlicer_materials' ] = 'KISSlicer/_materials_templ.ini'
-save[ 'KISSlicer_materials' ] = 'KISSlicer/_materials_{0}_{2}.ini'
+save[ 'KISSlicer_materials' ] = saveDir + 'KISSlicer/_materials_{0}_{2}.ini'
 templ[ 'KISSlicer_printers' ] = 'KISSlicer/_printers_templ.ini'
-save[ 'KISSlicer_printers' ] = 'KISSlicer/_printers_{0}_{2}.ini'
+save[ 'KISSlicer_printers' ] = saveDir + 'KISSlicer/_printers_{0}_{2}.ini'
 templ[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_templ.ini'
-save[ 'KISSlicer_styles' ] = 'KISSlicer/_styles_{0}_{2}.ini'
+save[ 'KISSlicer_styles' ] = saveDir + 'KISSlicer/_styles_{0}_{2}.ini'
 templ[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_templ.ini'
-save[ 'KISSlicer_supports' ] = 'KISSlicer/_supports_{0}_{2}.ini'
+save[ 'KISSlicer_supports' ] = saveDir + 'KISSlicer/_supports_{0}_{2}.ini'
 
 templ[ 'Marlin' ] = 'Marlin/zbot_templ.patch'
-save[ 'Marlin' ] = 'Marlin/Zbot_{0}.patch'
+save[ 'Marlin' ] = saveDir + 'Marlin/Zbot_{0}.patch'
 
 for app in Apps:
     with open (templ[ app ], "r") as templFile[ app ]:
