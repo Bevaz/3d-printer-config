@@ -2,7 +2,7 @@
 <profile name="zbot_{{ modelName }}">
   <printMaterial></printMaterial>
   <printQuality></printQuality>
-  <extruder name="Extruder 1">
+  <extruder name="Main Extruder">
     <toolheadNumber>0</toolheadNumber>
     <diameter>{{ nozzleSize }}</diameter>
     <autoWidth>1</autoWidth>
@@ -12,6 +12,22 @@
     <retractionDistance>1</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
     <retractionZLift>2</retractionZLift>
+    <retractionSpeed>1800</retractionSpeed>
+    <useCoasting>0</useCoasting>
+    <coastingDistance>0.2</coastingDistance>
+    <useWipe>0</useWipe>
+    <wipeDistance>5</wipeDistance>
+  </extruder>
+  <extruder name="Raft Extruder">
+    <toolheadNumber>0</toolheadNumber>
+    <diameter>{{ nozzleSize }}</diameter>
+    <autoWidth>1</autoWidth>
+    <width>{{ width }}</width>
+    <extrusionMultiplier>2</extrusionMultiplier>
+    <useRetract>0</useRetract>
+    <retractionDistance>1</retractionDistance>
+    <extraRestartDistance>0</extraRestartDistance>
+    <retractionZLift>0</retractionZLift>
     <retractionSpeed>1800</retractionSpeed>
     <useCoasting>0</useCoasting>
     <coastingDistance>0.2</coastingDistance>
@@ -30,22 +46,26 @@
   <startPointOriginZ>300</startPointOriginZ>
   <sequentialIslands>0</sequentialIslands>
   <spiralVaseMode>0</spiralVaseMode>
-  <firstLayerHeightRatio>2</firstLayerHeightRatio>
-  <firstLayerUnderspeed>1</firstLayerUnderspeed>
+  <firstLayerHeightPercentage>25</firstLayerHeightPercentage>
+  <firstLayerWidthPercentage>200</firstLayerWidthPercentage>
+  <firstLayerUnderspeed>0.3</firstLayerUnderspeed>
   <useRaft>1</useRaft>
-  <raftLayers>3</raftLayers>
+  <raftExtruder>1</raftExtruder>
+  <raftLayers>1</raftLayers>
   <raftOffset>4</raftOffset>
-  <raftSeparationDistance>0.17</raftSeparationDistance>
+  <raftSeparationDistance>0</raftSeparationDistance>
   <raftInfill>85</raftInfill>
   <disableRaftBaseLayers>0</disableRaftBaseLayers>
   <useSkirt>0</useSkirt>
+  <skirtExtruder>0</skirtExtruder>
   <skirtLayers>1</skirtLayers>
-  <skirtOutlines>1</skirtOutlines>
-  <skirtOffset>4</skirtOffset>
+  <skirtOutlines>4</skirtOutlines>
+  <skirtOffset>0</skirtOffset>
   <infillExtruder>0</infillExtruder>
   <externalInfillPattern>Rectilinear</externalInfillPattern>
   <infillPercentage>{{ infillPercentage }}</infillPercentage>
   <outlineOverlapPercentage>50</outlineOverlapPercentage>
+  <infillExtrusionWidthPercentage>100</infillExtrusionWidthPercentage>
   <minInfillLength>5</minInfillLength>
   <infillLayerInterval>1</infillLayerInterval>
   <randomInfillStartPoint>1</randomInfillStartPoint>
@@ -54,6 +74,8 @@
   <supportExtruder>0</supportExtruder>
   <supportInfill>40</supportInfill>
   <supportExtraInflation>1</supportExtraInflation>
+  <denseSupportLayers>0</denseSupportLayers>
+  <denseSupportInfill>70</denseSupportInfill>
   <supportLayerInterval>1</supportLayerInterval>
   <supportHorizontalPartOffset>0.3</supportHorizontalPartOffset>
   <supportUpperSeparationLayers>1</supportUpperSeparationLayers>
@@ -85,6 +107,7 @@
   <use5D>1</use5D>
   <relativeEdistances>0</relativeEdistances>
   <allowEaxisZeroing>1</allowEaxisZeroing>
+  <independentExtruderAxes>0</independentExtruderAxes>
   <includeM10123>0</includeM10123>
   <stickySupport>1</stickySupport>
   <detectArcs>0</detectArcs>
@@ -92,7 +115,7 @@
   <arcRadialCompensation>1</arcRadialCompensation>
   <gcodeXoffset>0</gcodeXoffset>
   <gcodeYoffset>0</gcodeYoffset>
-  <gcodeZoffset>-0.75</gcodeZoffset>
+  <gcodeZoffset>0</gcodeZoffset>
   <overrideMachineDefinition>0</overrideMachineDefinition>
   <machineTypeOverride>0</machineTypeOverride>
   <strokeXoverride>{{ printSizeX }}</strokeXoverride>
@@ -114,9 +137,11 @@
   <createX3G>0</createX3G>
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
+  <createMB5G>0</createMB5G>
   <postProcessing></postProcessing>
   <defaultSpeed>{{ defaultSpeed }}</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
+  <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
   <rapidXYspeed>{{ maxXYSpeed }}</rapidXYspeed>
   <rapidZspeed>{{ maxZSpeed }}</rapidZspeed>
@@ -129,8 +154,6 @@
   <minPrintHeight>0.5</minPrintHeight>
   <useMaxPrintHeight>0</useMaxPrintHeight>
   <maxPrintHeight>0</maxPrintHeight>
-  <overlapRemoval>0</overlapRemoval>
-  <overlapRemovalPercentage>0.3</overlapRemovalPercentage>
   <useDiaphragm>0</useDiaphragm>
   <diaphragmLayerInterval>20</diaphragmLayerInterval>
   <robustSlicing>0</robustSlicing>
@@ -142,4 +165,9 @@
   <useRetractionOozeRate>0</useRetractionOozeRate>
   <retractionOozeRate>100</retractionOozeRate>
   <onlyWipeOutlines>1</onlyWipeOutlines>
+  <toolChangeRetractionDistance>12</toolChangeRetractionDistance>
+  <toolChangeExtraRestartDistance>-0.5</toolChangeExtraRestartDistance>
+  <toolChangeRetractionSpeed>600</toolChangeRetractionSpeed>
+  <allowThinWallGapFill>1</allowThinWallGapFill>
+  <thinWallAllowedOverlapPercentage>10</thinWallAllowedOverlapPercentage>
 </profile>
